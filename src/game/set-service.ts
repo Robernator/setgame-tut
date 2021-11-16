@@ -2,6 +2,7 @@ import { CardModel } from './card.model.js';
 
 export class SetService {
     private onStack = new Array<CardModel>();
+    private onTable = new Array<CardModel>();
 
     constructor() {
         console.log('show board game');
@@ -9,7 +10,7 @@ export class SetService {
 
     private showCardsOnTable() {
         let boardHtml = '';
-        for (const card of this.onStack) {
+        for (const card of this.onTable) {
             boardHtml += `<div><img id="${card.cardId}" src="${card.filename}" class="card"/></div>`;
         }
         document.getElementById('board-grid')!.innerHTML = boardHtml;
@@ -17,11 +18,22 @@ export class SetService {
 
     public createBoard(): void {
         this.createStack();
-        this,this.showCardsOnTable();
+        this.cardsOnTable();
+        this.showCardsOnTable();
     }
 
+    private cardsOnTable() {
+        for (var nr = 1; nr <= 12; nr++) {
+            const card = this.onStack.pop();
+            if (card) {
+                this.onTable.push(card);
+            }
+        }
+    }
+    
     private createStack() {
         this.onStack.length = 0;
+        this.onTable.length = 0;
         const orderedStack = new Array();
         let cardNr = 0;
         for (var nr = 1; nr <= 3; nr++) {
