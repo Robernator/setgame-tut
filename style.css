@@ -1,0 +1,11 @@
+.card {
+    margin: 0;
+    width:150px;
+    padding: 0px; 
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 170px 170px 170px 170px;
+    padding: 10px;
+}
