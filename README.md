@@ -1,6 +1,7 @@
 # SetGame
 Simple game with Typescript
-Showing the cards
+
+Setup
 
 // install lite-server and start the server
 npm i
