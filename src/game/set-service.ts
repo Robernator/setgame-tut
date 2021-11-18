@@ -27,6 +27,9 @@ export class SetService {
     }
 
     private selectCard(cardId: string) {
+        if (this.onTable.filter(card => card.selected === true).length === 3) {
+            return;
+        }
         const card = this.onTable.find(c => c.cardId === cardId);
         if (card) {
             card.selected = !card.selected
@@ -71,6 +74,8 @@ export class SetService {
         this.cardsOnTable();
         this.addCardForAlwaysSet();
         this.showCardsOnTable();
+        this.showNrCardsOnStack();
+       
     }
 
     public createMenuListener(): void {
