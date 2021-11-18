@@ -58,6 +58,26 @@ export class SetService {
         this.showCardsOnTable();
     }
 
+
+    public createMenuListener(): void {
+        let btn = document.getElementById('startGame');
+        btn!.addEventListener("click", (e: Event) => this.createBoard());
+
+        let cheat = document.getElementById('cheat');
+        cheat!.addEventListener("click", (e: Event) => this.findSetByCheat());
+
+        let nextCardsAfterSet = document.getElementById('nextCardsAfterSet');
+        nextCardsAfterSet!.addEventListener("click", (e: Event) => this.newCardsAfterSetFound());
+    }
+
+    private findSetByCheat() {
+        alert('findSetByCheat');
+    }
+
+    private newCardsAfterSetFound() {
+        alert('newCardsAfterSetFound');
+    }
+
     private cardsOnTable() {
         for (var nr = 1; nr <= 12; nr++) {
             const card = this.onStack.pop();

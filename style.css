@@ -41,3 +41,26 @@
     width: 700px;
     background: red;
 }
+
+.grid-menu {
+    display: grid;
+    grid-template-columns: 150px 150px 150px 150px 150px 150px 150px 150px;
+    padding: 10px;
+}
+
+.button {
+    background-color: #519ed1;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: Verdana;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+
+
