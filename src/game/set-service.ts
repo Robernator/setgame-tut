@@ -25,7 +25,13 @@ export class SetService {
     }
 
     private selectCard(cardId: string) {
-        alert('pressed cardId : ' + cardId);
+        const card = this.onTable.find(c => c.cardId === cardId);
+        if (card) {
+            card.selected = !card.selected
+            const className = card.selected ? 'card-selected' : 'card';
+            let btn = document.getElementById(cardId);
+            btn!.className = className;
+        }
     }
 
     public createBoard(): void {

@@ -9,5 +9,6 @@ npm run start
 // compile and watch
 tsc -w
 
-Add card selection  
-Creating cardEventListeners
+Show selected cards with shading the card, stylesheet
+
+
