@@ -116,6 +116,7 @@ export class SetService {
         });
         this.showCardsOnTable();
         this.clearSelectionShow();
+        this.showNrCardsOnStack();
     }
 
     private cardsOnTable() {
@@ -177,6 +178,10 @@ export class SetService {
             card.selected = false;
             card.isSet = false
         });
+    }
+
+    private showNrCardsOnStack() {
+        document.getElementById('cardsOnStack')!.innerHTML = `Cards: ${this.onStack.length}`;
     }
 
     private isThereSet(): boolean {
