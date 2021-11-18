@@ -58,7 +58,6 @@ export class SetService {
         this.showCardsOnTable();
     }
 
-
     public createMenuListener(): void {
         let btn = document.getElementById('startGame');
         btn!.addEventListener("click", (e: Event) => this.createBoard());
