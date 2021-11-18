@@ -9,6 +9,7 @@ npm run start
 // compile and watch
 tsc -w
 
-Show selected cards with shading the card, stylesheet
+After 3 selected cards show the 3 cards
+
 
 

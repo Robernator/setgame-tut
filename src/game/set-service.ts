@@ -3,6 +3,7 @@ import { CardModel } from './card.model.js';
 export class SetService {
     private onStack = new Array<CardModel>();
     private onTable = new Array<CardModel>();
+    private setSetSelected = new Array<CardModel>();
 
     constructor() {
         console.log('show board game');
@@ -32,6 +33,23 @@ export class SetService {
             let btn = document.getElementById(cardId);
             btn!.className = className;
         }
+        this.setSetSelected = this.onTable.filter(card => card.selected === true).sort( (f,s) => f.number > s.number? 1: -1);
+        if (this.setSetSelected.length === 3) {
+            this.showSelectedOnTable();
+        }
+    }
+
+    private showSelectedOnTable() {
+        let boardHtml = '';
+        for (const card of this.setSetSelected) {
+            boardHtml += `<div><img id="${card.cardId}" src="${card.filename}" class="card"/></div>`;
+        }
+        document.getElementById('showSet')!.innerHTML = boardHtml;
+        this.showSetOnTable(true);
+    }
+
+    private showSetOnTable(showVisible: boolean) {
+        document.getElementById('show-set-container')!.className = (showVisible === true ? 'show-set show-visible' : 'show-set not-visible');
     }
 
     public createBoard(): void {

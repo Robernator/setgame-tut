@@ -18,3 +18,26 @@
     grid-template-columns: 170px 170px 170px 170px;
     padding: 10px;
 }
+
+.not-visible {
+    opacity: 0;
+}
+
+.show-visible {
+    opacity: 1;
+    transition: opacity 0.5s linear;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 170px 170px 170px 170px;
+    padding: 10px;
+}
+
+.show-set {
+    position: absolute;
+    top: 300px;
+    left: 10;
+    width: 700px;
+    background: red;
+}
