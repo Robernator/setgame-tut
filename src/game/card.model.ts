@@ -6,7 +6,6 @@ export class CardModel {
     filling: CardFilling; //{clear, solid, shade}
     filename: string;
     selected = false;
-    selectedCheating = false;
     isSet = false;
 
     constructor(color_:CardColor, number_: Number, shape_:CardShape, filling_:CardFilling, cardId: number = 1) {
