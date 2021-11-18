@@ -10,7 +10,7 @@ npm run start
 tsc -w
 
 Find set by cheat button
-Next cards after finding correct set
+After 3 seconds remover the selected cheat cards
 
 
 
