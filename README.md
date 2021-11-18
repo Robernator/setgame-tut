@@ -9,4 +9,5 @@ npm run start
 // compile and watch
 tsc -w
 
-// show 12 cards on the board (on table)
+Add card selection  
+Creating cardEventListeners

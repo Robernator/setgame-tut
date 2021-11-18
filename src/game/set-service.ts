@@ -14,7 +14,19 @@ export class SetService {
             boardHtml += `<div><img id="${card.cardId}" src="${card.filename}" class="card"/></div>`;
         }
         document.getElementById('board-grid')!.innerHTML = boardHtml;
-    } 
+        this.createCardEventListeners();
+    }
+
+    private createCardEventListeners(): void {
+        for (const card of this.onTable) {
+            let btn = document.getElementById(card.cardId);
+            btn!.addEventListener("click", (e: Event) => this.selectCard(card.cardId));
+        }
+    }
+
+    private selectCard(cardId: string) {
+        alert('pressed cardId : ' + cardId);
+    }
 
     public createBoard(): void {
         this.createStack();
@@ -30,7 +42,7 @@ export class SetService {
             }
         }
     }
-    
+
     private createStack() {
         this.onStack.length = 0;
         this.onTable.length = 0;
