@@ -10,7 +10,7 @@ npm run start
 tsc -w
 
 
-Show cards: 81
+Always set on table
 
 
 

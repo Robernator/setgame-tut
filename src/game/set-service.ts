@@ -91,7 +91,7 @@ export class SetService {
                 btn!.className = 'card-cheat';
             });
         }
-        setTimeout(() => this.clearSelectionShow(), 3000);
+        setTimeout(() => this.clearSelectionShow(), 2000);
     }
 
     private clearSelectionShow() {
@@ -115,8 +115,16 @@ export class SetService {
             }
         });
         this.showCardsOnTable();
+        this.addCardForAlwaysSet();
         this.clearSelectionShow();
         this.showNrCardsOnStack();
+       
+    }
+
+    private addCardForAlwaysSet() {
+        while (this.onStack.length > 0 && !this.isThereSet()) {
+            this.onTable.push(this.onStack.pop()!);
+        }
     }
 
     private cardsOnTable() {
