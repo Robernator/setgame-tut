@@ -10,6 +10,7 @@ export class SetService {
     }
 
     private showCardsOnTable() {
+        this.showSetOnTable(false);
         let boardHtml = '';
         for (const card of this.onTable) {
             boardHtml += `<div><img id="${card.cardId}" src="${card.filename}" class="card"/></div>`;
@@ -25,6 +26,13 @@ export class SetService {
         }
     }
 
+    private removeAddEventListeners(): void {
+        for (const card of this.onTable) {
+            let btn = document.getElementById(card.cardId);
+            btn!.removeEventListener("click", (e: Event) => this.selectCard(card.cardId));
+        }
+    }
+
     private selectCard(cardId: string) {
         const card = this.onTable.find(c => c.cardId === cardId);
         if (card) {
@@ -35,21 +43,34 @@ export class SetService {
         }
         this.setSetSelected = this.onTable.filter(card => card.selected === true).sort((f, s) => f.number > s.number ? 1 : -1);
         if (this.setSetSelected.length === 3) {
-            this.showSelectedOnTable();
+            const isSet = this.checkSet(this.setSetSelected[0], this.setSetSelected[1], this.setSetSelected[2]);
+            this.showSelectedOnTable(isSet);
         }
     }
 
-    private showSelectedOnTable() {
+    private checkSet(card1: CardModel, card2: CardModel, card3: CardModel): boolean {
+        const cardThird = this.createThirdCard(card1, card2);
+        const findSet = card3.filename === cardThird.filename;
+        if (findSet) {
+            card1.isSet = true;
+            card2.isSet = true;
+            card3.isSet = true;
+        }
+        return findSet;
+    }
+
+    private showSelectedOnTable(isSet: boolean) {
         let boardHtml = '';
         for (const card of this.setSetSelected) {
             boardHtml += `<div><img id="${card.cardId}" src="${card.filename}" class="card"/></div>`;
         }
         document.getElementById('showSet')!.innerHTML = boardHtml;
-        this.showSetOnTable(true);
+        this.showSetOnTable(true, isSet);
     }
 
-    private showSetOnTable(showVisible: boolean) {
-        document.getElementById('show-set-container')!.className = (showVisible === true ? 'show-set show-visible' : 'show-set not-visible');
+    private showSetOnTable(showVisible: boolean, isSet = false) {
+        const isSetClass = isSet? 'show-set-ok': 'show-set-wrong';
+        document.getElementById('show-set-container')!.className = (showVisible === true ? 'show-set show-visible ' + isSetClass : 'show-set not-visible');
     }
 
     public createBoard(): void {
@@ -57,7 +78,6 @@ export class SetService {
         this.cardsOnTable();
         this.showCardsOnTable();
     }
-
 
     public createMenuListener(): void {
         let btn = document.getElementById('startGame');
@@ -71,6 +91,7 @@ export class SetService {
     }
 
     private findSetByCheat() {
+        this.showSetOnTable(false);
         if (this.isThereSet()) {
             this.onTable.filter(c => c.isSet).forEach(card => {
                 let btn = document.getElementById(card.cardId);
@@ -89,7 +110,17 @@ export class SetService {
     }
 
     private newCardsAfterSetFound() {
-        alert('newCardsAfterSetFound');
+        this.removeAddEventListeners();
+        this.onTable.filter(c => c.isSet).forEach(card => {
+            const cardNr = this.onTable.indexOf(card);
+            const cardInSet = this.onTable[cardNr];
+            if (this.onStack.length > 0 && this.onTable.length <= 12) {
+                this.onTable[cardNr] = this.onStack.pop()!;
+            } else {
+                this.onTable.splice(cardNr, 1);
+            }
+        });
+        this.showCardsOnTable();
     }
 
     private cardsOnTable() {

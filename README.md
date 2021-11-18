@@ -9,8 +9,9 @@ npm run start
 // compile and watch
 tsc -w
 
-Find set by cheat button
-After 3 seconds remover the selected cheat cards
+After selecting 3 cards show if it set or not a set
+Next button
+
 
 
 
