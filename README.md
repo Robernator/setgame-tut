@@ -9,7 +9,7 @@ npm run start
 // compile and watch
 tsc -w
 
-Add top menu
+Find set by cheat button
 
 
 

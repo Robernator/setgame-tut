@@ -62,5 +62,13 @@
     cursor: pointer;
 }
 
+.card-cheat { 
+    margin: 0;
+    width: 140px;
+    padding: 0px; 
+    border: 5px solid green;
+    border-radius: 35px;
+    background-color: green;
+}
 
 

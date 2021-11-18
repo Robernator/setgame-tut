@@ -9,7 +9,7 @@ export class CardModel {
     selectedCheating = false;
     isSet = false;
 
-    constructor(color_:CardColor, number_: Number, shape_:CardShape, filling_:CardFilling, cardId: number) {
+    constructor(color_:CardColor, number_: Number, shape_:CardShape, filling_:CardFilling, cardId: number = 1) {
         this.cardId = 'card' + cardId;
         this.color = color_;
         this.number = number_;

@@ -33,7 +33,7 @@ export class SetService {
             let btn = document.getElementById(cardId);
             btn!.className = className;
         }
-        this.setSetSelected = this.onTable.filter(card => card.selected === true).sort( (f,s) => f.number > s.number? 1: -1);
+        this.setSetSelected = this.onTable.filter(card => card.selected === true).sort((f, s) => f.number > s.number ? 1 : -1);
         if (this.setSetSelected.length === 3) {
             this.showSelectedOnTable();
         }
@@ -71,7 +71,12 @@ export class SetService {
     }
 
     private findSetByCheat() {
-        alert('findSetByCheat');
+        if (this.isThereSet()) {
+            this.onTable.filter(c => c.selectedCheating).forEach(card => {
+                let btn = document.getElementById(card.cardId);
+                btn!.className = card.selectedCheating ? 'card-cheat' : 'card';
+            });
+        }
     }
 
     private newCardsAfterSetFound() {
@@ -114,5 +119,45 @@ export class SetService {
         return Math.floor(Math.random() * cards);
     }
 
+    private getProperty(nr1: Number, nr2: Number) {
+        if ((nr1 === 1 && nr2 === 2) || (nr1 === 2 && nr2 === 1)) {
+            return 3;
+        }
+        if ((nr1 === 3 && nr2 === 2) || (nr1 === 2 && nr2 === 3)) {
+            return 1;
+        }
+        return 2;
+    }
+
+    private createThirdCard(card1: CardModel, card2: CardModel) {
+        const nr = card1.number === card2.number ? card2.number : this.getProperty(card1.number, card2.number);
+        const color = card1.color === card2.color ? card2.color : this.getProperty(card1.color, card2.color);
+        const shape = card1.shape === card2.shape ? card2.shape : this.getProperty(card1.shape, card2.shape);
+        const filling = card1.filling === card2.filling ? card2.filling : this.getProperty(card1.filling, card2.filling);
+        return new CardModel(color, nr, shape, filling);
+    }
+
+    private isThereSet(): boolean {
+        this.onTable.forEach(card => {
+            card.selected = false;
+            card.selectedCheating = false
+        });
+        const nrOfCards = this.onTable.length;
+        for (var cardNr = 0; cardNr < nrOfCards; cardNr++) {
+            const card1 = this.onTable[cardNr];
+            for (var cardNextNr = cardNr + 1; cardNextNr < nrOfCards; cardNextNr++) {
+                const card2 = this.onTable[cardNextNr];
+                const card3 = this.createThirdCard(card1, card2);
+                const cardFound = this.onTable.find(c => c.filename === card3.filename);
+                if (cardFound) {
+                    card1.selectedCheating = true;
+                    card2.selectedCheating = true;
+                    cardFound.selectedCheating = true;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
 }
