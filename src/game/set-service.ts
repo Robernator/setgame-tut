@@ -69,6 +69,7 @@ export class SetService {
     public createBoard(): void {
         this.createStack();
         this.cardsOnTable();
+        this.addCardForAlwaysSet();
         this.showCardsOnTable();
     }
 
