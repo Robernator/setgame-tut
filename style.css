@@ -20,12 +20,11 @@
 }
 
 .not-visible {
-    opacity: 0;
+    display: none;
 }
 
 .show-visible {
-    opacity: 1;
-    transition: opacity 0.5s linear;
+    display: block;
 }
 
 .grid-container {
