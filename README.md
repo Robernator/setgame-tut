@@ -10,6 +10,7 @@ npm run start
 tsc -w
 
 Find set by cheat button
+Next cards after finding correct set
 
 
 

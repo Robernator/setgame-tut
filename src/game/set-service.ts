@@ -76,7 +76,7 @@ export class SetService {
                 let btn = document.getElementById(card.cardId);
                 btn!.className = card.selectedCheating ? 'card-cheat' : 'card';
             });
-        }
+        }  
     }
 
     private newCardsAfterSetFound() {
@@ -137,11 +137,15 @@ export class SetService {
         return new CardModel(color, nr, shape, filling);
     }
 
-    private isThereSet(): boolean {
+    private clearSelection() {
         this.onTable.forEach(card => {
             card.selected = false;
             card.selectedCheating = false
         });
+    }
+
+    private isThereSet(): boolean {
+        this.clearSelection();
         const nrOfCards = this.onTable.length;
         for (var cardNr = 0; cardNr < nrOfCards; cardNr++) {
             const card1 = this.onTable[cardNr];
