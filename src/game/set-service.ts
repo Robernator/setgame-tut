@@ -72,9 +72,9 @@ export class SetService {
 
     private findSetByCheat() {
         if (this.isThereSet()) {
-            this.onTable.filter(c => c.selectedCheating).forEach(card => {
+            this.onTable.filter(c => c.isSet).forEach(card => {
                 let btn = document.getElementById(card.cardId);
-                btn!.className = card.selectedCheating ? 'card-cheat' : 'card';
+                btn!.className = card.isSet ? 'card-cheat' : 'card';
             });
         }
     }
@@ -140,7 +140,7 @@ export class SetService {
     private isThereSet(): boolean {
         this.onTable.forEach(card => {
             card.selected = false;
-            card.selectedCheating = false
+            card.isSet = false
         });
         const nrOfCards = this.onTable.length;
         for (var cardNr = 0; cardNr < nrOfCards; cardNr++) {
@@ -150,9 +150,9 @@ export class SetService {
                 const card3 = this.createThirdCard(card1, card2);
                 const cardFound = this.onTable.find(c => c.filename === card3.filename);
                 if (cardFound) {
-                    card1.selectedCheating = true;
-                    card2.selectedCheating = true;
-                    cardFound.selectedCheating = true;
+                    card1.isSet = true;
+                    card2.isSet = true;
+                    cardFound.isSet = true;
                     return true;
                 }
             }
