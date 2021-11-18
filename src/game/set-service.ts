@@ -26,13 +26,6 @@ export class SetService {
         }
     }
 
-    private removeAddEventListeners(): void {
-        for (const card of this.onTable) {
-            let btn = document.getElementById(card.cardId);
-            btn!.removeEventListener("click", (e: Event) => this.selectCard(card.cardId));
-        }
-    }
-
     private selectCard(cardId: string) {
         const card = this.onTable.find(c => c.cardId === cardId);
         if (card) {
@@ -69,7 +62,7 @@ export class SetService {
     }
 
     private showSetOnTable(showVisible: boolean, isSet = false) {
-        const isSetClass = isSet? 'show-set-ok': 'show-set-wrong';
+        const isSetClass = isSet ? 'show-set-ok' : 'show-set-wrong';
         document.getElementById('show-set-container')!.className = (showVisible === true ? 'show-set show-visible ' + isSetClass : 'show-set not-visible');
     }
 
@@ -97,20 +90,21 @@ export class SetService {
                 let btn = document.getElementById(card.cardId);
                 btn!.className = 'card-cheat';
             });
-        }  
+        }
         setTimeout(() => this.clearSelectionShow(), 3000);
     }
 
     private clearSelectionShow() {
-        this.onTable.filter(c => c.isSet).forEach(card => {
+        this.onTable.filter(c => c.isSet || c.selected).forEach(card => {
             let btn = document.getElementById(card.cardId);
             card.isSet = false;
+            card.selected = false;
             btn!.className = 'card';
         });
     }
 
     private newCardsAfterSetFound() {
-        this.removeAddEventListeners();
+        this.showSetOnTable(false);
         this.onTable.filter(c => c.isSet).forEach(card => {
             const cardNr = this.onTable.indexOf(card);
             const cardInSet = this.onTable[cardNr];
@@ -121,6 +115,7 @@ export class SetService {
             }
         });
         this.showCardsOnTable();
+        this.clearSelectionShow();
     }
 
     private cardsOnTable() {
