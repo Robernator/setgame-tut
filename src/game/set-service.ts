@@ -33,7 +33,7 @@ export class SetService {
             let btn = document.getElementById(cardId);
             btn!.className = className;
         }
-        this.setSetSelected = this.onTable.filter(card => card.selected === true).sort((f, s) => f.number > s.number ? 1 : -1);
+        this.setSetSelected = this.onTable.filter(card => card.selected === true);
         if (this.setSetSelected.length === 3) {
             this.showSelectedOnTable();
         }
