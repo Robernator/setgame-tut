@@ -77,7 +77,7 @@ export class SetService {
                 btn!.className = 'card-cheat';
             });
         }  
-        setTimeout(() => this.clearSelectionShow(), 3000);
+        
     }
 
     private clearSelectionShow() {
