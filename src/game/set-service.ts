@@ -17,7 +17,7 @@ export class SetService {
 
     public createBoard(): void {
         this.createStack();
-        this,this.showCardsOnTable();
+        this.showCardsOnTable();
     }
 
     private createStack() {
