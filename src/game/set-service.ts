@@ -66,17 +66,14 @@ export class SetService {
         let cheat = document.getElementById('cheat');
         cheat!.addEventListener("click", (e: Event) => this.findSetByCheat());
 
-        let nextCardsAfterSet = document.getElementById('nextCardsAfterSet');
-        nextCardsAfterSet!.addEventListener("click", (e: Event) => this.newCardsAfterSetFound());
+    
     }
 
     private findSetByCheat() {
         alert('findSetByCheat');
     }
 
-    private newCardsAfterSetFound() {
-        alert('newCardsAfterSetFound');
-    }
+ 
 
     private cardsOnTable() {
         for (var nr = 1; nr <= 12; nr++) {
