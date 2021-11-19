@@ -36,15 +36,12 @@ export class SetService {
         }
         // shake the stack of cards
         for (var nr = 81; nr >= 1; nr--) {
-            const cardNr = this.randomNr(nr);
+            const cardNr = nr-1;
             this.onStack.push(orderedStack[cardNr]);
             orderedStack.splice(cardNr, 1);
         }
     }
 
-    private randomNr(cards: number): number {
-        return Math.floor(Math.random() * cards);
-    }
-
+   
 
 }
